@@ -1,3 +1,4 @@
+# ***** POSTGRES ***** ***** POSTGRES ***** ***** POSTGRES ***** ***** POSTGRES ***** ***** POSTGRES ***** #
 version: '3'
 
 services:
@@ -9,7 +10,7 @@ services:
     environment:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_NAME}
-    container_name: teslodb
+    container_name: estevezdb
     volumes:
       - ./postgres:/var/lib/postgresql/data
 

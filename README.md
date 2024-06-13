@@ -37,7 +37,25 @@ Para comenzar a usar este cascarón, simplemente clona el repositorio, instala l
 
 - [**TablePlus**](https://tableplus.com/download): Herramienta moderna, nativa y amigable para administrar bases de datos. Es útil para visualizar, editar y administrar tus datos en la base de datos.
 
-## 1. Variables de Entorno
+## 1. Clonación del Repositorio
+
+El primer paso para comenzar a trabajar con este proyecto es clonar el repositorio. Para hacerlo, abre una terminal en la ubicación donde deseas guardar el proyecto y ejecuta el siguiente comando:
+
+```bash
+git clone https://github.com/project-dev-estevez/nestjs-shell.git
+```
+
+## 2. Instalación de Dependencias
+
+Una vez clonado el repositorio, el siguiente paso es instalar las dependencias del proyecto. Para hacerlo, navega a la carpeta del proyecto en la terminal y ejecuta el siguiente comando:
+
+```bash
+yarn install
+```
+> **Nota:** Aunque también puedes usar `npm install` para instalar las dependencias, recomendamos usar `yarn` debido a su eficiencia y rapidez.
+
+
+## 3. Variables de Entorno
 
 Las variables de entorno son una forma de configurar la aplicación para diferentes entornos, permitiendo que los valores cambien según el entorno en el que se esté ejecutando la aplicación.
 
@@ -51,53 +69,42 @@ El archivo `.env` no se debe subir al control de versiones, por lo que se ha añ
 
 ![Screnshot](image.png)
 
-## Base de Datos
+## 4. Base de Datos
 
 Este proyecto utiliza PostgreSQL como sistema de gestión de bases de datos. Para facilitar el desarrollo, se incluye un archivo `docker-compose.yml` en la raiz del proyecto que configura un contenedor Docker con una imagen de PostgreSQL, también se encuetra comentado la configuración para levantar una base de datos MongoDB o MySQL.
 
-Para iniciar la base de datos, asegúrate de tener Docker instalado en tu máquina y luego ejecuta el siguiente comando en la terminal:
+Para iniciar la base de datos, asegúrate de tener Docker instalado y ejecutandose en tu máquina y luego, ubicado en el path del proyecto ejecuta el siguiente comando:
 
 ```bash
 docker-compose up -d
 ```
 
+### Seeders de la Base de Datos
 
+Los seeders son scripts que permiten poblar la base de datos con datos de prueba. Son útiles para probar la aplicación durante el desarrollo y para asegurarse de que ciertas condiciones de datos siempre se cumplan.
 
+Este proyecto incluye seeders que puedes ejecutar para poblar tu base de datos con datos de prueba. Para cargar los seeders, realiza una solicitud GET a la siguiente URL:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Installation
-
-```bash
-$ yarn install
+```http
+http://localhost:3000/api/v1/seed
 ```
 
-## Running the app
 
-```bash
-# development
-$ yarn run start
 
-# watch mode
-$ yarn run start:dev
 
-# production mode
-$ yarn run start:prod
-```
+
+
+
+
+
+<!-- 
+
+
+
+
+
+
+
 
 ## Test
 
@@ -120,12 +127,13 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 - Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
 - Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- Twitter - [@nestframework](https://twitter.com/nestframework) -->
 
 ## Stack usado
-* PostgreSQL
 * Nest
+* Docker
+* PostgreSQL
 
-## License
+<!-- ## License
 
-Nest is [MIT licensed](LICENSE).
+Nest is [MIT licensed](LICENSE). -->

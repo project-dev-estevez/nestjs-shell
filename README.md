@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  Cascarón para crear backends con NestJS. Con ❤️ para <b>Estevez.Jor</b>
+  Cascarón para crear backends en NestJS. Con ❤️ para <b>Estevez.Jor</b>
 </p>
 
 # Descripción General

@@ -49,7 +49,7 @@ Este proyecto utiliza un archivo `.env` para definir las variables de entorno. P
 
 El archivo `.env` no se debe subir al control de versiones, por lo que se ha añadido al archivo `.gitignore` para evitar subirlo accidentalmente.
 
-
+![Screnshot](image.png)
 
 ## Base de Datos
 

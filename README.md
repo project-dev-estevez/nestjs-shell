@@ -69,6 +69,8 @@ El archivo `.env` no se debe subir al control de versiones, por lo que se ha añ
 
 ![Screnshot](image.png)
 
+> **Nota:** Las variables de entorno se configuraron con `ConfigModule` y se validaron con `joi`.
+
 ## 4. Base de Datos
 
 Este proyecto utiliza PostgreSQL como sistema de gestión de bases de datos. Para facilitar el desarrollo, se incluye un archivo `docker-compose.yml` en la raiz del proyecto que configura un contenedor Docker con una imagen de PostgreSQL, también se encuetra comentado la configuración para levantar una base de datos MongoDB o MySQL.

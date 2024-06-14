@@ -114,6 +114,12 @@ $ yarn run test:cov
 yarn add @nestjs/typeorm typeorm
 yarn add pg
 6. Se agrego yarn add bcrypt para el cifrado de contraseñas
+7. se instalo passport para la autenticación
+yarn add @nestjs/passport passport
+8. tambien se instalo JWT para manejo de los tokens
+yarn add @nestjs/jwt passport-jwt
+9. los tipos para JWT
+yarn add -D @types/passport-jwt
 
 
 # Tecnologías usadas

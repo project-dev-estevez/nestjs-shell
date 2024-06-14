@@ -92,7 +92,10 @@ http://localhost:3000/api/v1/seed
 ```
 
 
-
+# Cosas que se hicieron:
+1. Crear enpoint para los seeds con test unitarios.
+2. agregar el prefijo global /api/v1
+3. 
 
 
 

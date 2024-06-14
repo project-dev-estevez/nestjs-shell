@@ -9,6 +9,8 @@ async function main() {
   const port = configService.get<number>('port');
   const logger = new Logger('Main');
 
+  app.setGlobalPrefix('api/v1');
+
   await app.listen(port);
   logger.log(`Application is running on port: ${port}`);
 }

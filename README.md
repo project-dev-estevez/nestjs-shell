@@ -113,6 +113,8 @@ $ yarn run test:cov
 5. Se instaló TypeORM y Driver de Postgres
 yarn add @nestjs/typeorm typeorm
 yarn add pg
+6. Se agrego yarn add bcrypt para el cifrado de contraseñas
+
 
 # Tecnologías usadas
 * NestJS

@@ -110,6 +110,9 @@ $ yarn run test:cov
 2. agregar el prefijo global /api/v1
 3. Agregar class-validator y class-transformer
 4. Agregar validationPipe Globalmente
+5. Se instaló TypeORM y Driver de Postgres
+yarn add @nestjs/typeorm typeorm
+yarn add pg
 
 # Tecnologías usadas
 * NestJS

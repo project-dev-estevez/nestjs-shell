@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { BeforeInsert, BeforeUpdate, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity('users')
 export class User {
@@ -42,4 +42,15 @@ export class User {
         onUpdate: 'CURRENT_TIMESTAMP'
     })
     updatedAt: Date;
+
+    @BeforeInsert()
+    @BeforeUpdate()
+    transformFields() {
+        this.email = this.email.toLowerCase().trim();
+        this.fullName = this.capitalize(this.fullName);
+    }
+
+    private capitalize(str: string) {
+        return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ');
+    }
 }

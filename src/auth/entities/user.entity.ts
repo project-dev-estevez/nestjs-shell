@@ -1,3 +1,4 @@
+import { ApiProperty } from "@nestjs/swagger";
 import { BeforeInsert, BeforeUpdate, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity('users')

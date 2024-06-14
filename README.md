@@ -91,12 +91,30 @@ Este proyecto incluye seeders que puedes ejecutar para poblar tu base de datos c
 http://localhost:3000/api/v1/seed
 ```
 
+## 5. Tests
+
+```bash
+# unit tests
+$ yarn run test
+
+# e2e tests
+$ yarn run test:e2e
+
+# test coverage
+$ yarn run test:cov
+```
+
 
 # Cosas que se hicieron:
 1. Crear enpoint para los seeds con test unitarios.
 2. agregar el prefijo global /api/v1
-3. 
+3. Agregar class-validator y class-transformer
+4. Agregar validationPipe Globalmente
 
+# Tecnologías usadas
+* NestJS
+* Docker
+* PostgreSQL
 
 
 
@@ -134,10 +152,7 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 - Website - [https://nestjs.com](https://nestjs.com/)
 - Twitter - [@nestframework](https://twitter.com/nestframework) -->
 
-## Stack usado
-* Nest
-* Docker
-* PostgreSQL
+
 
 <!-- ## License
 

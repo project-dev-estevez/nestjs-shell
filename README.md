@@ -91,7 +91,14 @@ Este proyecto incluye seeders que puedes ejecutar para poblar tu base de datos c
 http://localhost:3000/api/v1/seed
 ```
 
-## 5. Tests
+## 5. Ejecutar el Proyecto
+
+```bash
+# unit tests
+$ yarn start:dev
+```
+
+## 6. Tests
 
 ```bash
 # unit tests

@@ -4,7 +4,6 @@ import { AuthService } from './auth.service';
 import { CreateUserDto, LoginUserDto } from './dto';
 import { Auth, GetUser } from './decorators';
 import { User } from './entities/user.entity';
-import { UserModel } from './models/user.model';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -15,9 +14,6 @@ export class AuthController {
   ) {}
 
   @Post('register')
-  @ApiOkResponse({ type: UserModel })
-  @ApiResponse({ status: 400, description: 'Bad request'})
-  @ApiResponse({ status: 500, description: 'Internal server error' })
   createUser( @Body() createUserDto: CreateUserDto ) {
     return this.authService.create(createUserDto);
   }

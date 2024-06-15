@@ -13,6 +13,13 @@ export class AuthController {
     private readonly authService: AuthService
   ) {}
 
+  @Get('check-token')
+  @ApiBearerAuth()
+  @Auth()
+  checkAuthStatus( @GetUser() user: User ) {
+    return this.authService.checkAuth( user );
+  }
+
   @Post('register')
   createUser( @Body() createUserDto: CreateUserDto ) {
     return this.authService.create(createUserDto);
@@ -24,11 +31,9 @@ export class AuthController {
     return this.authService.login(loginUserDto);
   }
 
-  @Get('check-token')
-  @ApiBearerAuth()
-  @Auth()
-  checkAuthStatus( @GetUser() user: User ) {
-    return this.authService.checkAuth( user );
+  @Post('forgot-password')
+  forgotPassword( @Body() forgotPasswordDto: ForgotPasswordDto ) {
+    return this.authService.forgotPassword( forgotPasswordDto );
   }
 
   @Put('change-password')
@@ -39,11 +44,6 @@ export class AuthController {
     @Body() changePasswordDto: ChangePasswordDto
   ) {
     return this.authService.changePassword( user, changePasswordDto );
-  }
-
-  @Post('forgot-password')
-  forgotPassword( @Body() forgotPasswordDto: ForgotPasswordDto ) {
-    return this.authService.forgotPassword( forgotPasswordDto );
   }
 
   @Put('reset-password')

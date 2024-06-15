@@ -1,5 +1,5 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { BeforeInsert, BeforeUpdate, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { BeforeInsert, BeforeUpdate, Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { ResetToken } from "./reset-token.entity";
 
 @Entity('users')
 export class User {
@@ -28,6 +28,12 @@ export class User {
         default: ['user']
     })
     roles: string[];
+
+    @ManyToOne(
+        () => ResetToken, 
+        resetToken => resetToken.user
+    )
+    resetToken: ResetToken;
 
     @CreateDateColumn({
         type: 'timestamp', 

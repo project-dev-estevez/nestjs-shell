@@ -1,7 +1,7 @@
 import { Controller, Post, Body, Get, HttpCode, Put } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
-import { ChangePasswordDto, CreateUserDto, ForgotPasswordDto, LoginUserDto } from './dto';
+import { ChangePasswordDto, CreateUserDto, ForgotPasswordDto, LoginUserDto, ResetPasswordDto } from './dto';
 import { Auth, GetUser } from './decorators';
 import { User } from './entities/user.entity';
 
@@ -44,6 +44,11 @@ export class AuthController {
   @Post('forgot-password')
   forgotPassword( @Body() forgotPasswordDto: ForgotPasswordDto ) {
     return this.authService.forgotPassword( forgotPasswordDto );
+  }
+
+  @Put('reset-password')
+  resetPassword( @Body() resetPasswordDto: ResetPasswordDto ) {
+    return this.authService.resetPassword( resetPasswordDto );
   }
 
 }

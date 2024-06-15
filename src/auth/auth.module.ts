@@ -7,13 +7,15 @@ import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtStrategy } from './strategies/jwt.strategy';
+import { ResetToken } from './entities/reset-token.entity';
+import { CommonModule } from 'src/common/common.module';
 
 @Module({
   controllers: [ AuthController ],
   providers: [ AuthService, JwtStrategy ],
   imports: [
     ConfigModule,
-    TypeOrmModule.forFeature([ User ]),
+    TypeOrmModule.forFeature([ User, ResetToken ]),
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.registerAsync({
       imports: [ ConfigModule ],
@@ -22,7 +24,8 @@ import { JwtStrategy } from './strategies/jwt.strategy';
         secret: configService.get('JWT_SECRET'),
         signOptions: { expiresIn: '1d' }
       })
-    })
+    }),
+    CommonModule
   ],
   exports: [ TypeOrmModule, JwtStrategy, PassportModule, JwtModule ]
 })

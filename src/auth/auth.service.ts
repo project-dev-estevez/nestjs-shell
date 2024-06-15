@@ -1,13 +1,18 @@
 import { BadRequestException, Injectable, InternalServerErrorException, Logger, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { JwtService } from '@nestjs/jwt';
 import { Repository } from 'typeorm';
 
 import * as bcrypt from 'bcrypt';
+import { v4 as uuid } from 'uuid';
+import { DateTime } from 'luxon';
 
 import { User } from './entities/user.entity';
 import { ChangePasswordDto, CreateUserDto, ForgotPasswordDto, LoginUserDto } from './dto';
 import { JwtPayload } from './interfaces/jwt-payload.interface';
-import { JwtService } from '@nestjs/jwt';
+import { ResetToken } from './entities/reset-token.entity';
+import { MailService } from 'src/common/services/mail/mail.service';
+
 
 @Injectable()
 export class AuthService {
@@ -17,7 +22,10 @@ export class AuthService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
-    private readonly jwtService: JwtService
+    @InjectRepository(ResetToken)
+    private readonly resetTokenRepository: Repository<ResetToken>,
+    private readonly jwtService: JwtService,
+    private readonly mailService: MailService
   ) {}
 
   async create( createUserDto: CreateUserDto ) {
@@ -99,12 +107,35 @@ export class AuthService {
     if (!userDB)
       throw new BadRequestException(`The email ${email} is not registered`);
 
-    // if user exists, generate password reset token and send email
+    const resetToken = uuid();
+    const resetTokenDB = this.resetTokenRepository.create({
+      token: resetToken,
+      user: userDB
+    });
+    this.resetTokenRepository.save( resetTokenDB );
 
-    // Send the link to the user by email 
-
-
+    this.mailService.sendPasswordResetEmail( email, resetToken );
   }
+
+  async resetPassword( resetPasswordDto: { token: string, newPassword: string } ) {
+      
+      const { token, newPassword } = resetPasswordDto;
+      const resetTokenDB = await this.resetTokenRepository.findOne({ where: { token }, relations: ['user'] });
+      if (!resetTokenDB)
+        throw new BadRequestException('Invalid token');
+
+      const oneDayAgo = DateTime.local().minus({ days: 1 });
+      const past1Day = DateTime.fromJSDate(resetTokenDB.createdAt) < oneDayAgo;
+      if ( past1Day ) {
+        await this.resetTokenRepository.delete( resetTokenDB.id );
+        throw new BadRequestException('Reset token expired, please request a new one');
+      }
+  
+      const newPasswordHash = bcrypt.hashSync( newPassword, 10 );
+      resetTokenDB.user.password = newPasswordHash;
+      await this.userRepository.save( resetTokenDB.user );  
+      await this.resetTokenRepository.delete( resetTokenDB.id );
+    }
 
   private getJwtToken( payload: JwtPayload ) {
 

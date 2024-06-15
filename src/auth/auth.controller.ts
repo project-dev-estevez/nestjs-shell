@@ -1,5 +1,5 @@
 import { Controller, Post, Body, Get, HttpCode } from '@nestjs/common';
-import { ApiOkResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOkResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { CreateUserDto, LoginUserDto } from './dto';
 import { Auth, GetUser } from './decorators';
@@ -25,6 +25,7 @@ export class AuthController {
   }
 
   @Get('check-token')
+  @ApiBearerAuth()
   @Auth()
   checkAuthStatus( @GetUser() user: User ) {
     return this.authService.check( user );

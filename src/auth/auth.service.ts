@@ -5,7 +5,7 @@ import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 
 import { User } from './entities/user.entity';
-import { CreateUserDto, LoginUserDto } from './dto';
+import { ChangePasswordDto, CreateUserDto, ForgotPasswordDto, LoginUserDto } from './dto';
 import { JwtPayload } from './interfaces/jwt-payload.interface';
 import { JwtService } from '@nestjs/jwt';
 
@@ -68,12 +68,41 @@ export class AuthService {
 
   }
 
-  async check( user: User ) {
+  async checkAuth( user: User ) {
 
     return {
       ...user,
       token: this.getJwtToken({ id: user.id })
     };
+
+  }
+
+  async changePassword( user: User, changePasswordDto: ChangePasswordDto ) {
+    
+    const { id } = user;
+    const userDB = await this.userRepository.findOne({ where: { id } });
+
+    const { oldPassword, newPassword } = changePasswordDto;
+    const passwordMatch = bcrypt.compareSync( oldPassword, userDB.password );
+    if ( !passwordMatch )
+      throw new UnauthorizedException('Invalid credentials (old password)');
+
+    const newPasswordHash = bcrypt.hashSync( newPassword, 10 );
+    userDB.password = newPasswordHash;
+    await this.userRepository.save( userDB );
+  }
+
+  async forgotPassword( forgotPasswordDto: ForgotPasswordDto ) {
+    
+    const { email } = forgotPasswordDto; 
+    const userDB = await this.userRepository.findOne({ where: { email } });
+    if (!userDB)
+      throw new BadRequestException(`The email ${email} is not registered`);
+
+    // if user exists, generate password reset token and send email
+
+    // Send the link to the user by email 
+
 
   }
 

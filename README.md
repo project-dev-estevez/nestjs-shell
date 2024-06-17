@@ -50,6 +50,10 @@ git clone https://github.com/project-dev-estevez/nestjs-shell.git
 Una vez clonado el repositorio, el siguiente paso es instalar las dependencias del proyecto. Para hacerlo, navega a la carpeta del proyecto en la terminal y ejecuta el siguiente comando:
 
 ```bash
+# Instalar Yarn de manera global
+npm install -g yarn
+
+# Instalar las dependencias con Yarn
 yarn install
 ```
 > **Nota:** Aunque también puedes usar `npm install` para instalar las dependencias, recomendamos usar `yarn` debido a su eficiencia y rapidez.
@@ -81,6 +85,12 @@ Para iniciar la base de datos, asegúrate de tener Docker instalado y ejecutando
 docker-compose up -d
 ```
 
+## 5. Ejecutar el Proyecto
+
+```bash
+$ yarn start:dev
+```
+
 ### Seeders de la Base de Datos
 
 Los seeders son scripts que permiten poblar la base de datos con datos de prueba. Son útiles para probar la aplicación durante el desarrollo y para asegurarse de que ciertas condiciones de datos siempre se cumplan.
@@ -89,13 +99,6 @@ Este proyecto incluye seeders que puedes ejecutar para poblar tu base de datos c
 
 ```http
 http://localhost:3000/api/v1/seed
-```
-
-## 5. Ejecutar el Proyecto
-
-```bash
-# unit tests
-$ yarn start:dev
 ```
 
 ## 6. Tests

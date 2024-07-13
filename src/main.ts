@@ -7,6 +7,7 @@ import { AppModule } from './app.module';
 
 async function main() {
   const app = await NestFactory.create(AppModule);
+  app.enableCors();
   const configService = app.get(ConfigService);
   const port = configService.get<number>('port');
   const logger = new Logger('Main');
@@ -19,8 +20,8 @@ async function main() {
   }));
 
   const config = new DocumentBuilder()
-                  .setTitle('NestJS Shell API')
-                  .setDescription('Cascarón para crear backends en NestJS. Con ❤️ para Estevez.Jor')
+                  .setTitle('Matrix API')
+                  .setDescription('Proyecto Matrix')
                   .setVersion('1.0')
                   .addBearerAuth()
                   .build();

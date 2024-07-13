@@ -4,7 +4,7 @@ import { ResetToken } from "./reset-token.entity";
 @Entity('users')
 export class User {
 
-    @PrimaryGeneratedColumn('uuid')
+    @PrimaryGeneratedColumn('increment')
     id: string;
 
     @Column('text', {
@@ -17,6 +17,29 @@ export class User {
 
     @Column('text')
     fullName: string;
+
+    @Column('text')
+    document: string; // Agregado
+
+    @Column('text')
+    country: string; // Agregado
+
+    @Column('text')
+    phoneNumber: string; // Agregado
+
+    @Column('text', {
+        nullable: true
+    })
+    phoneNumber2: string; // Agregado, opcional
+
+    @Column('text')
+    sponsor: string; // Agregado
+
+    // @Column('bool')
+    // termsAccepted: boolean; // Agregado
+
+    // @Column('bool')
+    // dataUsageAuthorization: boolean; // Agregado
 
     @Column('bool', {
         default: true
